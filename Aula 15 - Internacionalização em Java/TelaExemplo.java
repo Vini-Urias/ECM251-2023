@@ -19,7 +19,7 @@ public class TelaExemplo extends JFrame implements ActionListener
    public TelaExemplo()
    {  // Menu simples de escolha de idioma
       int   op = Integer.parseInt(JOptionPane.showInputDialog(
-      "Idioma - Language - Langue\n\n1- Portugues\n2- English\n3- Francaise\n "
+      "Idioma - Language - Langue\n\n1- Portugues\n2- English\n3- Francaise\n4 - Italiano\n"
                                                              )
                                  );
       // Carga dos arquivos de internacionalizao
@@ -30,13 +30,15 @@ public class TelaExemplo extends JFrame implements ActionListener
                   break;
          case  3: bn = ResourceBundle.getBundle("ex1", Locale.FRANCE); // Idioma "puro" = apenas o país
                   break;
+         case  4: bn = ResourceBundle.getBundle("ex1", new Locale("it", "IT"));
+                  break;
          default: bn = ResourceBundle.getBundle("ex1");
                   break;
       }
       // Escolhe Layout do conteiner
       Container cx = getContentPane();
       cx.setLayout(new FlowLayout());
-      // Inst�ncia��o dos objetos
+      // Instanciacao dos objetos
       bt = new JButton(bn.getString("tela1.botao.calcular"));
       rt = new JLabel(bn.getString("tela1.rotulo.valor") + ":");
       tx = new JTextField(10);
