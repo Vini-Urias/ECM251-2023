@@ -9,9 +9,17 @@ import java.util.Scanner;
 
 public class ValidacaoUsuarioSenha {
     private Scanner input;
+    private String username;
+    private int senha;
     
-
-
+    public void lerUsuario(){
+        Scanner input = new Scanner( System.in );
+        System.out.printf( "%s\n%s", 
+            "Enter username <SPACE> Password <ENTER>",
+            "? " );
+        this.username = input.next();
+        this.senha = input.nextInt();
+    }
 
     public void openFile()
     {  try
@@ -25,27 +33,40 @@ public class ValidacaoUsuarioSenha {
 
     public void readRecords()  // read record from file
    {  // object to be written to screen
-      ConstrutorUsuarioSenha record = new ConstrutorUsuarioSenha();
-      try   // read records from file using Scanner object
-      {  while( input.hasNext() )
+        ConstrutorUsuarioSenha record = new ConstrutorUsuarioSenha();
+        try   // read records from file using Scanner object
+      {     while( input.hasNext() )
          {  record.setUser( input.next() );
             record.setSenha(input.nextInt());
-            
-            // display record contents
-            System.out.printf( "%-10s%-12d%\n",
-               record.getUser(), record.getSenha());
+            this.lerUsuario();
+            if(record.getUser().equals(this.username)){
+                if(record.getSenha()==senha){
+                    System.out.println("LOGIN REALIZADO COM SUCESSO");
+                }
+            }
+            else{
+                System.out.println("LOGIN E/OU SENHA ERRADO(S)");
+            }
+
+
          }  // end while
       }  // end try
-      catch( NoSuchElementException elementException )
-      {  System.err.println( "File improperly formed." );
-         input.close();
-         System.exit( 1 );
+        catch( NoSuchElementException elementException )
+      {     System.err.println( "File improperly formed." );
+            input.close();
+            System.exit( 1 );
       }  // end catch
-      catch( IllegalStateException stateException )
-      {  System.err.println( "Error reading from file." );
-         System.exit( 1 );
+        catch( IllegalStateException stateException )
+      {     System.err.println( "Error reading from file." );
+            System.exit( 1 );
       }  // end catch
    }  // end method readRecords
+
+    
+   
+
+
+
 
    public void closeFile() // close file and terminate application
    {  if( input != null )
