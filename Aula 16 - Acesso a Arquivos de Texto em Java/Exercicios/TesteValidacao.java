@@ -6,7 +6,5 @@ public class TesteValidacao {
         usuario.openFile();
         usuario.readRecords();
         usuario.closeFile();
-
-
     }
 }
